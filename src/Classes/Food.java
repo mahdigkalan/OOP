@@ -8,11 +8,11 @@ public class Food {
     public static ArrayList<Food> allFoodsArrayList = new ArrayList<Food>() ;
     public ArrayList<Comment> foodCommentsArrayList = new ArrayList<Comment>() ;
     public ArrayList<Rating> foodRatingsArrayList = new ArrayList<Rating>() ;
-    public ArrayList<Order> foodOrderHistory = new ArrayList<Order>() ;
+    public ArrayList<User> foodOrderHistory = new ArrayList<User>() ;
     public static int counterIDFood ;
     public String foodName ;
     public String foodID ;
-    public int foodCost ;
+    public double foodCost ;
     public boolean possibilityOfOrdering ;
     public boolean discountActivation ;
     public boolean activeOrder ;

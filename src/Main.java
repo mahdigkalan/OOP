@@ -158,6 +158,15 @@ public class Main {
                         }
                         Functions.commentResponse(commentID, response);
                     }
+                } else if (inputArray[0].equals("DISPLAY") && inputArray[1].equals("CART") && inputArray[2].equals("STATUS") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User){
+                    Functions.showCartStatus((User) Role.loggedInRole);
+                } else if (inputArray[0].equals("CONFIRM") && inputArray[1].equals("ORDER") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User){
+                    String orderID = inputArray[2];
+                    Functions.confirmOrder((User) Role.loggedInRole, orderID);
+                } else if (inputArray[0].equals("CHARGE") && inputArray[1].equals("ACCOUNT") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User){
+                    Functions.chargeAccount((User) Role.loggedInRole);
+                } else if (inputArray[0].equals("DISPLAY") && inputArray[1].equals("ACCOUNT") && inputArray[2].equals("CHARGE") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User){
+                    Functions.showAccountCharge((User) Role.loggedInRole);
                 } else if (inputArray[0].equals("SEARCH") && inputArray[1].equals("RESTAURANT") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser == null && Food.selectedFoodForUser == null) {
                     String restaurantName = inputArray[2];
                     Functions.ShowRelatedRestaurants(restaurantName);
@@ -166,6 +175,8 @@ public class Main {
                     Functions.selectRestaurant(restaurantID);
                 } else if (inputArray[0].equals("ACCESS") && inputArray[1].equals("ORDER") && inputArray[2].equals("HISTORY") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Food.selectedFoodForUser == null){
                     Functions.showOrdersHistory((User) Role.loggedInRole);
+                } else if (inputArray[0].equals("SELECT") && inputArray[1].equals("ORDER") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser != null && Food.selectedFoodForUser == null){
+                    Functions.selectOrder(inputArray[2]);
                 } else if (inputArray[0].equals("SEARCH") && inputArray[1].equals("FOOD") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser != null && Food.selectedFoodForUser == null) {
                     String foodName = inputArray[1];
                     Functions.ShowRelatedFoods(foodName);

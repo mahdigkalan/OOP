@@ -13,12 +13,11 @@ public class Restaurant {
     public ArrayList<String> restaurantFoodType = new ArrayList<String>() ;
     public ArrayList<Order> restaurantOrders = new ArrayList<Order>() ;
     public ArrayList<Food> restaurantMenu = new ArrayList<Food>() ;
-
+    public ArrayList<Order> restaurantOrdersHistory = new ArrayList<Order>() ;
     public String restaurantID ;
     public String restaurantName ;
     public Admin restaurantOwner ;
     public String restaurantLocation ;
-    public double restaurantRate ;
     public Restaurant(String restaurantName){
         this.restaurantName = restaurantName ;
     }

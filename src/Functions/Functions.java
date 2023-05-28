@@ -623,4 +623,64 @@ public class Functions {
             System.out.println();
         }
     }
+    public static void selectOrder(String orderID){
+        int k = -1;
+        for (int i = 0; i < ((User)Role.loggedInRole).userCart.cartorders.size(); i++)
+            if (((User)Role.loggedInRole).userCart.cartorders.get(i).orderID.equals(orderID))
+                k = i;
+        if (k != -1 ) {
+            System.out.println("Order with the ID \"" + orderID + "\" selected!");
+            int orderSize = ((User) Role.loggedInRole).userCart.cartorders.get(k).orderFoods.size();
+            if (orderSize != 0) {
+                double totalCost = 0;
+                System.out.println("Your order contains this foods:");
+                for (int i = 0; i < orderSize; i++) {
+                    System.out.print("Food \"" + ((User) Role.loggedInRole).userCart.cartorders.get(k).orderFoods.get(i).foodName + "\" ");
+                    System.out.print("with the ID \"" + ((User) Role.loggedInRole).userCart.cartorders.get(k).orderFoods.get(i).foodID + "\" ");
+                    System.out.println("with the price \"" + ((User) Role.loggedInRole).userCart.cartorders.get(k).orderFoods.get(i).foodCost + "\"");
+                    totalCost += ((User) Role.loggedInRole).userCart.cartorders.get(k).orderFoods.get(i).foodCost;
+                }
+                System.out.println("Total money that you should pay is \"" + totalCost + "\"");
+            } else
+                System.out.println("You add no foods in this Order!");
+        } else
+            System.out.println("There is no Order with this ID !!!");
+    }
+    public static void showCartStatus(User user){
+        for (int i=0;i<user.userCart.cartorders.size();i++){
+            System.out.print("From the restaurant \"" + user.userCart.cartorders.get(i).orderedRestaurant.restaurantName + "\" ");
+            System.out.print("with the total cost \"" + user.userCart.cartorders.get(i).getOrderCost() + "\" ");
+            System.out.println("and the ID \"" + user.userCart.cartorders.get(i).orderID + "\".");
+        }
+    }
+    public static void confirmOrder(User user, String orderID){
+        int k = -1;
+        for (int i = 0; i < user.userCart.cartorders.size(); i++)
+            if (user.userCart.cartorders.get(i).orderID.equals(orderID))
+                k = i;
+        if (k != -1 && user.userCart.cartorders.get(k).getOrderCost() <= user.getAccountCharge()){
+            user.userOrders.add(user.userCart.cartorders.get(k));
+            user.setAccountCharge(user.getAccountCharge() - user.userCart.cartorders.get(k).getOrderCost());
+            user.userCart.cartorders.get(k).orderedRestaurant.restaurantOrdersHistory.add(user.userCart.cartorders.get(k));
+            user.userCart.cartorders.remove(k);
+            System.out.println("Order successfully confirmed");
+        } else if (k != -1 && user.userCart.cartorders.get(k).getOrderCost() > user.getAccountCharge()){
+            System.out.println("Please charge your account first !!!");
+        }
+        else
+            System.out.println("There is no order with this ID !!!");
+    }
+    public static void chargeAccount(User user) {
+        System.out.print("How much would you want to charge? ");
+        double newCharge = scanner.nextDouble();
+        if (newCharge >= 0) {
+            System.out.println("Account charged successfully :)");
+            user.setAccountCharge(newCharge);
+        }
+        else
+            System.out.println("Sorry, you should enter a positive value !!!");
+    }
+    public static void showAccountCharge(User user){
+        System.out.println("You have \"" + user.getAccountCharge() + "\"$ in your account :)");
+    }
 }
