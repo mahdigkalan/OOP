@@ -246,6 +246,7 @@ public class Main {
                     Functions.showOrdersHistory((User) Role.loggedInRole);
                 } else if (inputArray[0].equals("SELECT") && inputArray[1].equals("ORDER") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser == null && Food.selectedFoodForUser == null){
                     Functions.selectOrder(inputArray[2]);
+                    System.out.println("You also should pay " + map.getCost(Order.LoggedInOrderForUser.orderedRestaurant.restaurantLocation,Order.LoggedInOrderForUser.orderedUser.userLocation) + "$ to delivery man !");
                 } else if (inputArray[0].equals("SEARCH") && inputArray[1].equals("FOOD") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser != null && Food.selectedFoodForUser == null) {
                     String foodName = inputArray[1];
                     Functions.ShowRelatedFoods(foodName);
@@ -284,6 +285,8 @@ public class Main {
                     Functions.addFoodToCart( (User) Role.loggedInRole,Restaurant.loggedInRestaurantForUser,Food.selectedFoodForUser,staticArrayLists);
                 } else if (inputArray[0].equals("SHOW") && inputArray[1].equals("ESTIMATED") && inputArray[2].equals("DELIVERY") && inputArray[3].equals("TIME") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser == null && Food.selectedFoodForUser == null && Order.LoggedInOrderForUser != null){
                     System.out.println("Estimated delivery time is : " + map.getTime(Order.LoggedInOrderForUser.orderedRestaurant.restaurantLocation,Order.LoggedInOrderForUser.orderedUser.userLocation) + " (minute/minutes)");
+                }else if (inputArray[0].equals("SHOW") && inputArray[0].equals("PATH") && Role.loggedInRoleExistance && Role.loggedInRole instanceof User && Restaurant.loggedInRestaurantForUser == null && Food.selectedFoodForUser == null && Order.LoggedInOrderForUser != null){
+                    System.out.println("The path for sending your order to you is " + map.getPath(Order.LoggedInOrderForUser.orderedRestaurant.restaurantLocation,Order.LoggedInOrderForUser.orderedUser.userLocation));
                 } else {
                     System.out.println("invalid command");
                 }

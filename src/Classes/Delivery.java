@@ -11,6 +11,7 @@ public class Delivery extends Role implements Serializable {
     private String userName;
     private String password;
     public String deliveryID ;
+    public Integer deliveryLocation;
     public Delivery(String userName,String password,String deliveryID){
         this.userName = userName ;
         this.password = password ;

@@ -568,13 +568,17 @@ public class Functions implements Serializable {
         else {
             System.out.println("Here is the list of available restaurants for you:");
             for (int i=0;i<((User)Role.loggedInRole).userOrders.size();i++)
-                for (int j=0;j<staticArrayLists.allRestaurantsArrayList.size();j++)
-                    if (((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.equals(staticArrayLists.allRestaurantsArrayList.get(j).restaurantFoodType))
-                        System.out.println("Restaurant \"" + staticArrayLists.allRestaurantsArrayList.get(i).restaurantName + "\" -> with the ID \"" + staticArrayLists.allRestaurantsArrayList.get(i).restaurantID + "\"");
+                for (int j=0;j<((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.size();j++)
+                    for (int k=0;k<staticArrayLists.allRestaurantsArrayList.size();k++)
+                        for (int l = 0;l<staticArrayLists.allRestaurantsArrayList.get(k).restaurantFoodType.size();l++)
+                            if (((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.get(j).equals(staticArrayLists.allRestaurantsArrayList.get(k).restaurantFoodType.get(l)))
+                                System.out.println("Restaurant \"" + staticArrayLists.allRestaurantsArrayList.get(k).restaurantName + "\" -> with the ID \"" + staticArrayLists.allRestaurantsArrayList.get(k).restaurantID + "\"");
             for (int i=0;i<((User)Role.loggedInRole).userOrders.size();i++)
-                for (int j=0;j<staticArrayLists.allRestaurantsArrayList.size();j++)
-                    if (!((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.equals(staticArrayLists.allRestaurantsArrayList.get(j).restaurantFoodType))
-                        System.out.println("Restaurant \"" + staticArrayLists.allRestaurantsArrayList.get(i).restaurantName + "\" -> with the ID \"" + staticArrayLists.allRestaurantsArrayList.get(i).restaurantID + "\"");
+                for (int j=0;j<((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.size();j++)
+                    for (int k=0;k<staticArrayLists.allRestaurantsArrayList.size();k++)
+                        for (int l = 0;l<staticArrayLists.allRestaurantsArrayList.get(k).restaurantFoodType.size();l++)
+                            if (!((User)Role.loggedInRole).userOrders.get(i).orderedRestaurant.restaurantFoodType.get(j).equals(staticArrayLists.allRestaurantsArrayList.get(k).restaurantFoodType.get(l)))
+                                System.out.println("Restaurant \"" + staticArrayLists.allRestaurantsArrayList.get(k).restaurantName + "\" -> with the ID \"" + staticArrayLists.allRestaurantsArrayList.get(k).restaurantID + "\"");
         }
     }
     public static void ShowRelatedRestaurants (String name,StaticArrayLists staticArrayLists){
@@ -610,7 +614,7 @@ public class Functions implements Serializable {
         else {
             System.out.println("Here is the list of foods at this restaurant:");
             for (int i = 0; i < restaurant.restaurantMenu.size(); i++)
-                System.out.println("Food \"" + restaurant.restaurantMenu.get(i).foodName + "\" with the ID \"" + restaurant.restaurantMenu.get(i).foodID + "\" and the price \"" + restaurant.restaurantMenu.get(i).foodCost + "\"");
+                System.out.println("Food \"" + restaurant.restaurantMenu.get(i).foodName + "\" with the ID \"" + restaurant.restaurantMenu.get(i).foodID + "\" and the price " + restaurant.restaurantMenu.get(i).foodCost + "$");
         }
     }
     public static void ShowRelatedFoods (String name){
@@ -835,10 +839,10 @@ public class Functions implements Serializable {
                 for (int i = 0; i < orderSize; i++) {
                     System.out.print("Food \"" + ((User) Role.loggedInRole).userOrders.get(k).orderFoods.get(i).foodName + "\" ");
                     System.out.print("with the ID \"" + ((User) Role.loggedInRole).userOrders.get(k).orderFoods.get(i).foodID + "\" ");
-                    System.out.println("with the price \"" + ((User) Role.loggedInRole).userOrders.get(k).orderFoods.get(i).foodCost + "\"");
+                    System.out.println("with the price " + ((User) Role.loggedInRole).userOrders.get(k).orderFoods.get(i).foodCost + "$");
                     totalCost += ((User) Role.loggedInRole).userOrders.get(k).orderFoods.get(i).foodCost;
                 }
-                System.out.println("Total money that you should pay is \"" + totalCost + "\"");
+                System.out.println("The money that you should pay is " + totalCost + "$");
             } else
                 System.out.println("You add no foods in this Order!");
         } else
@@ -850,7 +854,7 @@ public class Functions implements Serializable {
         else
             for (int i=0;i<user.userCart.cartorders.size();i++){
                 System.out.print((i+1) + "-> From the restaurant \"" + user.userCart.cartorders.get(i).orderedRestaurant.restaurantName + "\" ");
-                System.out.print("with the total cost \"" + user.userCart.cartorders.get(i).getOrderCost() + "\" ");
+                System.out.print("with the total cost " + user.userCart.cartorders.get(i).getOrderCost() + "$ ");
                 System.out.println("and the ID \"" + user.userCart.cartorders.get(i).orderID + "\".");
             }
     }
