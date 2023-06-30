@@ -1,6 +1,8 @@
 package Classes;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     public static Role loggedInRole ;
     public static boolean loggedInRoleExistance = false ;
     private String securityQuestionAnswer ;

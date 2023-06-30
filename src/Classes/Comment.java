@@ -1,7 +1,9 @@
 package Classes;
 
-public class Comment {
-    public static int counterIDComment ;
+import java.io.Serializable;
+
+public class Comment implements Serializable {
+    //public static int counterIDComment ;
     public User commentedUser ;
     public String comment ;
     public String commentResponse ;
